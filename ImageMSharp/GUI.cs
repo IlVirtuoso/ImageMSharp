@@ -57,6 +57,7 @@ namespace ImageMSharp
 
         private void Aggiorna_Click(object sender, EventArgs e)
         {
+            render.reset();
             visualize();
         }
 
@@ -71,5 +72,20 @@ namespace ImageMSharp
             FilterSelector.Text = FilterSelector.SelectedText;
             render.filter = FilterSelector.SelectedIndex;
         }
+
+        private void DigitaIlCodiceSegretoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SecretCode code = new SecretCode();
+            code.Show();
+            
+        }
+
+        private void ViewBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
+
     }
 }

@@ -41,7 +41,8 @@
             this.importaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aiutoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.daSviluppatoreIndipendenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Aggiorna = new MetroFramework.Controls.MetroButton();
+            this.Reset = new MetroFramework.Controls.MetroButton();
+            this.digitaIlCodiceSegretoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.ViewBox.TabIndex = 0;
             this.ViewBox.TabStop = false;
+            this.ViewBox.Click += new System.EventHandler(this.ViewBox_Click);
             // 
             // FilterSelector
             // 
@@ -116,20 +118,20 @@
             // SalvaButton
             // 
             this.SalvaButton.Name = "SalvaButton";
-            this.SalvaButton.Size = new System.Drawing.Size(180, 22);
+            this.SalvaButton.Size = new System.Drawing.Size(109, 22);
             this.SalvaButton.Text = "Salva";
             // 
             // ApriButton
             // 
             this.ApriButton.Name = "ApriButton";
-            this.ApriButton.Size = new System.Drawing.Size(180, 22);
+            this.ApriButton.Size = new System.Drawing.Size(109, 22);
             this.ApriButton.Text = "Apri";
             this.ApriButton.Click += new System.EventHandler(this.ApriButton_Click);
             // 
             // ChiudiButton
             // 
             this.ChiudiButton.Name = "ChiudiButton";
-            this.ChiudiButton.Size = new System.Drawing.Size(180, 22);
+            this.ChiudiButton.Size = new System.Drawing.Size(109, 22);
             this.ChiudiButton.Text = "Chiudi";
             // 
             // modificaToolStripMenuItem
@@ -143,13 +145,14 @@
             // importaToolStripMenuItem
             // 
             this.importaToolStripMenuItem.Name = "importaToolStripMenuItem";
-            this.importaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importaToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.importaToolStripMenuItem.Text = "Importa";
             // 
             // aiutoToolStripMenuItem
             // 
             this.aiutoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.daSviluppatoreIndipendenteToolStripMenuItem});
+            this.daSviluppatoreIndipendenteToolStripMenuItem,
+            this.digitaIlCodiceSegretoToolStripMenuItem});
             this.aiutoToolStripMenuItem.Name = "aiutoToolStripMenuItem";
             this.aiutoToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.aiutoToolStripMenuItem.Text = "Aiuto";
@@ -160,21 +163,28 @@
             this.daSviluppatoreIndipendenteToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.daSviluppatoreIndipendenteToolStripMenuItem.Text = "Da sviluppatore indipendente";
             // 
-            // Aggiorna
+            // Reset
             // 
-            this.Aggiorna.Location = new System.Drawing.Point(648, 248);
-            this.Aggiorna.Name = "Aggiorna";
-            this.Aggiorna.Size = new System.Drawing.Size(75, 23);
-            this.Aggiorna.TabIndex = 5;
-            this.Aggiorna.Text = "Aggiorna";
-            this.Aggiorna.Click += new System.EventHandler(this.Aggiorna_Click);
+            this.Reset.Location = new System.Drawing.Point(648, 248);
+            this.Reset.Name = "Reset";
+            this.Reset.Size = new System.Drawing.Size(75, 23);
+            this.Reset.TabIndex = 5;
+            this.Reset.Text = "Reset";
+            this.Reset.Click += new System.EventHandler(this.Aggiorna_Click);
+            // 
+            // digitaIlCodiceSegretoToolStripMenuItem
+            // 
+            this.digitaIlCodiceSegretoToolStripMenuItem.Name = "digitaIlCodiceSegretoToolStripMenuItem";
+            this.digitaIlCodiceSegretoToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.digitaIlCodiceSegretoToolStripMenuItem.Text = "Digita il codice Segreto";
+            this.digitaIlCodiceSegretoToolStripMenuItem.Click += new System.EventHandler(this.DigitaIlCodiceSegretoToolStripMenuItem_Click);
             // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.Aggiorna);
+            this.Controls.Add(this.Reset);
             this.Controls.Add(this.ComputeButton);
             this.Controls.Add(this.LabelText);
             this.Controls.Add(this.FilterSelector);
@@ -207,6 +217,7 @@
         private System.Windows.Forms.ToolStripMenuItem importaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aiutoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem daSviluppatoreIndipendenteToolStripMenuItem;
-        private MetroFramework.Controls.MetroButton Aggiorna;
+        private MetroFramework.Controls.MetroButton Reset;
+        private System.Windows.Forms.ToolStripMenuItem digitaIlCodiceSegretoToolStripMenuItem;
     }
 }

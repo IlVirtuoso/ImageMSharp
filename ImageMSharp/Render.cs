@@ -16,10 +16,12 @@ namespace ImageMSharp
             Threshold,
             BorderRecon
         }
+        private filters filtr;
 
         private ImageFactory image;
         private String _imagepath;
         private Image _picture;
+        private Image original;
         public int filter;
         public Render()
         {
@@ -29,6 +31,7 @@ namespace ImageMSharp
         private Effects effect;
         public void compute()
         {
+            FilterSelect(filter);
             load();
             image = effect.draw(image);
             picture = image.Image;
@@ -39,10 +42,10 @@ namespace ImageMSharp
         {
             switch (filter)
             {
-                case (int)filters.Threshold:
+                case (int) filters.Threshold:
                     effect = new Threshold();
                     break;
-                case (int)filters.BorderRecon:
+                case (int) filters.BorderRecon:
                     effect = new BorderRecon();
                     break;
 
@@ -58,6 +61,7 @@ namespace ImageMSharp
             set
             {
                 _picture = Image.FromFile(value);
+                original = picture;
                 this._imagepath = value;
             }
         }
@@ -87,6 +91,11 @@ namespace ImageMSharp
             }
         }
 
+
+        public void reset()
+        {
+            this.picture = this.original;
+        }
         
     }
 }
