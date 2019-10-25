@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\BorderRecon.cs" />
+    <Compile Include="Filters\GreyScale.cs" />
     <Compile Include="Filters\Threshold.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>

@@ -13,13 +13,22 @@ namespace ImageMSharp.Filters
     {
         public ImageFactory draw(ImageFactory image)
         {
-            int threshold = 127;
+            float threshold = 50 / 100;
             Bitmap destination = (Bitmap)image.Image;
             for (int x = 0; x < destination.Width; x++)
             {
                 for (int y = 0; y < destination.Height; y++)
                 {
-
+                    
+                    if(destination.GetPixel(x,y) <= threshold)
+                    {
+                        Console.WriteLine("Color: " + destination.GetPixel(x, y).ToArgb());
+                        destination.SetPixel(x, y, Color.Black);
+                    }
+                    else
+                    {
+                        destination.SetPixel(x, y, Color.White);
+                    }
                 }
             }
             ImageFactory newimage = new ImageFactory();
