@@ -75,6 +75,7 @@
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Effects.cs" />
+    <Compile Include="Libs\ImageMatrix.cs" />
     <Compile Include="Render.cs" />
     <Compile Include="ImageMSharp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

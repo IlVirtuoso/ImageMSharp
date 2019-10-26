@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ImageProcessor;
-using ImageProcessor.Imaging.Filters.Binarization;
+using ImageMSharp.Filters;
+using ImageMSharp.Libs;
 using System.Drawing;
 
 namespace ImageMSharp.Filters
 {
     class Threshold : Effects
     {
-        public ImageFactory draw(ImageFactory image)
+        public Image draw(Image image)
         {
-            float threshold = 50 / 100;
-            Bitmap destination = (Bitmap)image.Image;
-            for (int x = 0; x < destination.Width; x++)
+            int threshold = 127;
+            Bitmap newimage = new Bitmap(image.Width, image.Height);
+            Color[,] matrix = image.toMatrix();
+            for(int x = 0; x < image.Width; x++)
             {
-                for (int y = 0; y < destination.Height; y++)
+                for(int y = 0; y < image.Height; y++)
                 {
-                    
-                    if(destination.GetPixel(x,y) <= threshold)
+                    int r = matrix[x, y].R;
+                    int g = matrix[x, y].G;
+                    int b = matrix[x, y].B;
+                    int m = (r + g + b) / 3;
+                    if(m <= threshold)
                     {
-                        Console.WriteLine("Color: " + destination.GetPixel(x, y).ToArgb());
-                        destination.SetPixel(x, y, Color.Black);
+                        newimage.SetPixel(x, y, Color.FromArgb(0, 0, 0));
                     }
                     else
                     {
-                        destination.SetPixel(x, y, Color.White);
+                        newimage.SetPixel(x, y, Color.FromArgb(255, 255, 255));
                     }
                 }
             }
-            ImageFactory newimage = new ImageFactory();
-            newimage.Load(destination);
+ 
             return newimage;
         }
     }

@@ -9,32 +9,36 @@ using ImageMSharp.Filters;
 
 namespace ImageMSharp
 {
-    class Render
+    public class Render
     {
 
         enum filters{
             Threshold,
-            BorderRecon
+            BorderRecon,
+            GreyScale
         }
+
         private filters filtr;
 
-        private ImageFactory image;
+        private Image image;
         private String _imagepath;
         private Image _picture;
         private Image original;
-        public int filter;
-        public Render()
-        {
-            image = new ImageFactory();
-        }
+        private int _filter;
+   
 
         private Effects effect;
+
+ 
+        public Render(String path)
+        {
+            imagepath = path;
+        }
         public void compute()
         {
             FilterSelect(filter);
-            load();
             image = effect.draw(image);
-            picture = image.Image;
+            picture = image;
         }
 
         
@@ -47,6 +51,10 @@ namespace ImageMSharp
                     break;
                 case (int) filters.BorderRecon:
                     effect = new BorderRecon();
+                    break;
+
+                case (int) filters.GreyScale:
+                    effect = new GreyScale();
                     break;
 
             }
@@ -62,6 +70,7 @@ namespace ImageMSharp
             {
                 _picture = Image.FromFile(value);
                 original = picture;
+                image = new Bitmap(value);
                 this._imagepath = value;
             }
         }
@@ -77,25 +86,21 @@ namespace ImageMSharp
                 _picture = value;
             }
         }
-
-        public void load()
-        {
-            if(imagepath != null)
-            {
-                image.Load(imagepath);
-                
-            }
-            else
-            {
-                throw new Exception("Image not selected");
-            }
-        }
-
-
         public void reset()
         {
             this.picture = this.original;
         }
-        
+
+        public int filter
+        {
+            get
+            {
+                return this._filter;
+            }
+            set
+            {
+                _filter = value;
+            }
+        }
     }
 }

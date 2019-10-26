@@ -19,7 +19,6 @@ namespace ImageMSharp
     
         public GUI()
         {
-            render = new Render();
             InitializeComponent();
             lastdir = "C:\\";
         }
@@ -43,7 +42,8 @@ namespace ImageMSharp
             dialog.ShowDialog();
             imagepath = dialog.FileName;
             Console.WriteLine("File selected" + imagepath);
-            render.imagepath = imagepath;
+            Console.WriteLine("File selected" + imagepath);
+            render = new Render(imagepath);
             visualize();
         }
 
@@ -51,7 +51,6 @@ namespace ImageMSharp
         {
             Image vis = render.picture;
             ViewBox.Image = vis;
-            ViewBox.SizeMode = PictureBoxSizeMode.Zoom;
             ViewBox.Refresh();
         }
 
@@ -63,14 +62,25 @@ namespace ImageMSharp
 
         private void ComputeButton_Click(object sender, EventArgs e)
         {
-            render.compute();
-            visualize();
+            if(render == null)
+            {
+                throw new Exception("Please select a image before");
+            }
+            else
+            {
+                render.compute();
+                visualize();
+            }
         }
 
         private void FilterSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             FilterSelector.Text = FilterSelector.SelectedText;
             render.filter = FilterSelector.SelectedIndex;
+            if(render.filter != FilterSelector.SelectedIndex)
+            {
+                throw new Exception("Cannot set filter");
+            }
         }
 
         private void DigitaIlCodiceSegretoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,7 +95,9 @@ namespace ImageMSharp
 
         }
 
-      
+        private void FlowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }
