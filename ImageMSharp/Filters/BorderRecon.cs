@@ -11,8 +11,10 @@ namespace ImageMSharp.Filters
 {
     class BorderRecon:Effects
     {
+        displayDriver form;
         public Image draw(Image image)
         {
+            int progress = 0;
             GreyScale grey = new GreyScale();
             image = grey.draw(image);
             Bitmap img = new Bitmap(image.Width, image.Height);
@@ -21,6 +23,13 @@ namespace ImageMSharp.Filters
             {
                 for(int y = 1; y < image.Height - 1; y++)
                 {
+                    progress = (x / image.Width) * 100;
+                    while(progress > form.progressBar.Value)
+                    {
+                        form.progressBar.PerformStep();
+                        form.progressBar.Update();
+                        form.progressBar.Refresh();
+                    }
                     int pixelvalue = 0;
                     for(int Dx = -1; Dx <= 1; Dx++)
                     {
@@ -52,6 +61,19 @@ namespace ImageMSharp.Filters
             }
             return img;
             
+        }
+
+        public void formsetup()
+        {
+            form = new displayDriver();
+            form.parameter.Text = "Separator";
+            form.valueDisplay.Text = "0";
+            form.Show();
+        }
+
+        public void formdispose()
+        {
+            form.Dispose();
         }
     }
 }

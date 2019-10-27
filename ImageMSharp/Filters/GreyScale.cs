@@ -8,6 +8,7 @@ using System.Drawing;
 using ImageMSharp.Libs;
 
 
+
 namespace ImageMSharp.Filters
 {
     class GreyScale : Effects
@@ -22,6 +23,7 @@ namespace ImageMSharp.Filters
             {
                 for(int y = 0; y < img.GetLength(1); y++)
                 {
+                    
                     int r = img[x, y].R;
                     int g = img[x, y].G;
                     int b = img[x, y].B;
@@ -31,6 +33,14 @@ namespace ImageMSharp.Filters
                 }
             }
             return greyscaled;
+        }
+        public void formsetup()
+        {
+
+        }
+        public void formdispose()
+        {
+
         }
     }
 }

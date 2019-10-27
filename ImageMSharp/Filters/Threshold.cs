@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ImageMSharp.Filters;
 using ImageMSharp.Libs;
 using System.Drawing;
+using MetroFramework;
 
 namespace ImageMSharp.Filters
 {
@@ -36,6 +37,15 @@ namespace ImageMSharp.Filters
             }
  
             return newimage;
+        }
+        public void formsetup()
+        {
+
+        }
+
+        public void formdispose()
+        {
+
         }
     }
 }

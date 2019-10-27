@@ -7,6 +7,7 @@ using System.Drawing;
 using ImageProcessor;
 using ImageMSharp.Filters;
 
+
 namespace ImageMSharp
 {
     public class Render
@@ -25,6 +26,7 @@ namespace ImageMSharp
         private Image _picture;
         private Image original;
         private int _filter;
+        public bool effectformgenerated = false;
    
 
         private Effects effect;
@@ -36,7 +38,7 @@ namespace ImageMSharp
         }
         public void compute()
         {
-            FilterSelect(filter);
+            
             image = effect.draw(image);
             picture = image;
         }
@@ -68,10 +70,22 @@ namespace ImageMSharp
             }
             set
             {
-                _picture = Image.FromFile(value);
-                original = picture;
-                image = new Bitmap(value);
-                this._imagepath = value;
+                try
+                {
+                    _picture = Image.FromFile(value);
+                    original = picture;
+                    image = new Bitmap(value);
+                    this._imagepath = value;
+                }
+                catch(ArgumentException exc)
+                {
+                    Console.WriteLine(exc.Message);
+                }
+                catch(OutOfMemoryException exc)
+                {
+                    
+
+                }
             }
         }
 
@@ -89,6 +103,16 @@ namespace ImageMSharp
         public void reset()
         {
             this.picture = this.original;
+            this.image = this.original;
+        }
+
+        public void effectformdispose()
+        {
+            if (effectformgenerated)
+            {
+                effect.formdispose();
+                effectformgenerated = false;
+            }
         }
 
         public int filter
@@ -100,7 +124,14 @@ namespace ImageMSharp
             set
             {
                 _filter = value;
+                FilterSelect(value);
             }
+        }
+
+        public void effectgenerateform()
+        {
+            effect.formsetup();
+            effectformgenerated = true;
         }
     }
 }

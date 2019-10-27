@@ -41,11 +41,11 @@
             this.daSviluppatoreIndipendenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.digitaIlCodiceSegretoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Reset = new MetroFramework.Controls.MetroButton();
+            this.flowpanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ViewBox = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
+            this.flowpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // FilterSelector
@@ -61,7 +61,9 @@
             this.FilterSelector.Location = new System.Drawing.Point(3, 3);
             this.FilterSelector.Name = "FilterSelector";
             this.FilterSelector.Size = new System.Drawing.Size(121, 29);
+            this.FilterSelector.Style = MetroFramework.MetroColorStyle.Blue;
             this.FilterSelector.TabIndex = 1;
+            this.FilterSelector.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.FilterSelector.SelectedIndexChanged += new System.EventHandler(this.FilterSelector_SelectedIndexChanged);
             // 
             // ComputeButton
@@ -69,8 +71,10 @@
             this.ComputeButton.Location = new System.Drawing.Point(130, 3);
             this.ComputeButton.Name = "ComputeButton";
             this.ComputeButton.Size = new System.Drawing.Size(75, 23);
+            this.ComputeButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.ComputeButton.TabIndex = 3;
             this.ComputeButton.Text = "Compute";
+            this.ComputeButton.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.ComputeButton.Click += new System.EventHandler(this.ComputeButton_Click);
             // 
             // menuStrip1
@@ -98,20 +102,21 @@
             // SalvaButton
             // 
             this.SalvaButton.Name = "SalvaButton";
-            this.SalvaButton.Size = new System.Drawing.Size(180, 22);
+            this.SalvaButton.Size = new System.Drawing.Size(109, 22);
             this.SalvaButton.Text = "Salva";
+            this.SalvaButton.Click += new System.EventHandler(this.SalvaButton_Click);
             // 
             // ApriButton
             // 
             this.ApriButton.Name = "ApriButton";
-            this.ApriButton.Size = new System.Drawing.Size(180, 22);
+            this.ApriButton.Size = new System.Drawing.Size(109, 22);
             this.ApriButton.Text = "Apri";
             this.ApriButton.Click += new System.EventHandler(this.ApriButton_Click);
             // 
             // ChiudiButton
             // 
             this.ChiudiButton.Name = "ChiudiButton";
-            this.ChiudiButton.Size = new System.Drawing.Size(180, 22);
+            this.ChiudiButton.Size = new System.Drawing.Size(109, 22);
             this.ChiudiButton.Text = "Chiudi";
             // 
             // modificaToolStripMenuItem
@@ -125,7 +130,7 @@
             // importaToolStripMenuItem
             // 
             this.importaToolStripMenuItem.Name = "importaToolStripMenuItem";
-            this.importaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importaToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.importaToolStripMenuItem.Text = "Importa";
             // 
             // aiutoToolStripMenuItem
@@ -155,9 +160,24 @@
             this.Reset.Location = new System.Drawing.Point(211, 3);
             this.Reset.Name = "Reset";
             this.Reset.Size = new System.Drawing.Size(75, 23);
+            this.Reset.Style = MetroFramework.MetroColorStyle.Blue;
             this.Reset.TabIndex = 5;
             this.Reset.Text = "Reset";
+            this.Reset.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.Reset.Click += new System.EventHandler(this.Aggiorna_Click);
+            // 
+            // flowpanel
+            // 
+            this.flowpanel.AutoSize = true;
+            this.flowpanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowpanel.Controls.Add(this.FilterSelector);
+            this.flowpanel.Controls.Add(this.ComputeButton);
+            this.flowpanel.Controls.Add(this.Reset);
+            this.flowpanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowpanel.Location = new System.Drawing.Point(0, 374);
+            this.flowpanel.Name = "flowpanel";
+            this.flowpanel.Size = new System.Drawing.Size(781, 35);
+            this.flowpanel.TabIndex = 7;
             // 
             // ViewBox
             // 
@@ -169,19 +189,6 @@
             this.ViewBox.TabIndex = 6;
             this.ViewBox.TabStop = false;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.FilterSelector);
-            this.flowLayoutPanel1.Controls.Add(this.ComputeButton);
-            this.flowLayoutPanel1.Controls.Add(this.Reset);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 374);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(781, 35);
-            this.flowLayoutPanel1.TabIndex = 7;
-            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,19 +196,24 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(781, 409);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flowpanel);
             this.Controls.Add(this.ViewBox);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GUI";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "ImageMSharp";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GUI_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.flowpanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ViewBox)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,7 +233,7 @@
         private System.Windows.Forms.ToolStripMenuItem daSviluppatoreIndipendenteToolStripMenuItem;
         private MetroFramework.Controls.MetroButton Reset;
         private System.Windows.Forms.ToolStripMenuItem digitaIlCodiceSegretoToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowpanel;
         private System.Windows.Forms.PictureBox ViewBox;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

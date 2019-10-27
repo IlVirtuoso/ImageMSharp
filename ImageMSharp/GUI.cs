@@ -37,12 +37,12 @@ namespace ImageMSharp
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Scegli un file";
-            dialog.Filter = "*.jpg|*.jpg";
+            dialog.Filter = "*Jpeg Image File (.jpg)|*.jpg|Raw Image File (.Raw)|*.raw| Nikon Raw File(*.Nef)|*.NEF|Canon Raw File(*.CR2)|*.CR2";
             dialog.InitialDirectory = lastdir;
             dialog.ShowDialog();
             imagepath = dialog.FileName;
             Console.WriteLine("File selected" + imagepath);
-            Console.WriteLine("File selected" + imagepath);
+            lastdir = dialog.InitialDirectory;
             render = new Render(imagepath);
             visualize();
         }
@@ -75,12 +75,17 @@ namespace ImageMSharp
 
         private void FilterSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FilterSelector.Text = FilterSelector.SelectedText;
-            render.filter = FilterSelector.SelectedIndex;
-            if(render.filter != FilterSelector.SelectedIndex)
-            {
-                throw new Exception("Cannot set filter");
-            }
+           
+                render.effectformdispose();
+                FilterSelector.Text = FilterSelector.SelectedText;
+                render.filter = FilterSelector.SelectedIndex;
+                render.effectgenerateform();
+                if (render.filter != FilterSelector.SelectedIndex)
+                {
+                    throw new Exception("Cannot set filter");
+                }
+            
+            
         }
 
         private void DigitaIlCodiceSegretoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -96,6 +101,43 @@ namespace ImageMSharp
         }
 
         private void FlowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void SalvaButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Image tosave = render.picture;
+                SaveFileDialog save = new SaveFileDialog();
+                save.Title = "Scegli dove salvare il file";
+                save.InitialDirectory = lastdir;
+                save.Filter = "jpeg image file (*.jpg)|*.jpg|Raw Format File(*.raw)|*.raw";
+                save.AddExtension = true;
+                save.ShowDialog();
+                try
+                {
+                    tosave.Save(save.FileName);
+                }
+                catch(ArgumentException exc)
+                {
+                    Console.WriteLine(exc.Message);
+                }
+            }
+            catch (NullReferenceException exc)
+            {
+                Console.WriteLine(exc.Message);
+            }
+
+        }
+
+        private void ViewBox_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ProgressBar_Click(object sender, EventArgs e)
         {
 
         }
