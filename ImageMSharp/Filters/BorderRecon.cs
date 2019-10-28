@@ -19,16 +19,14 @@ namespace ImageMSharp.Filters
             image = grey.draw(image);
             Bitmap img = new Bitmap(image.Width, image.Height);
             Color[,] matrix = image.toMatrix();
+
             for(int x = 1; x < image.Width - 1; x++)
             {
                 for(int y = 1; y < image.Height - 1; y++)
                 {
-                    progress = (x / image.Width) * 100;
-                    while(progress > form.progressBar.Value)
+                    if(image.Width%x == 0)
                     {
                         form.progressBar.PerformStep();
-                        form.progressBar.Update();
-                        form.progressBar.Refresh();
                     }
                     int pixelvalue = 0;
                     for(int Dx = -1; Dx <= 1; Dx++)
