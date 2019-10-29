@@ -12,13 +12,17 @@ namespace ImageMSharp.Filters
 {
     class Threshold : Effects
     {
+
+        displayDriver form;
         public Image draw(Image image)
         {
-            int threshold = 127;
+            int threshold = form.trackBar.Value;
             Bitmap newimage = new Bitmap(image.Width, image.Height);
             Color[,] matrix = image.toMatrix();
             for(int x = 0; x < image.Width; x++)
             {
+                double progress = ((double)x / (double)image.Width) * 100;
+                form.progressBar.Value =(int) progress + 1;
                 for(int y = 0; y < image.Height; y++)
                 {
                     int r = matrix[x, y].R;
@@ -40,12 +44,28 @@ namespace ImageMSharp.Filters
         }
         public void formsetup()
         {
-
+            form = new displayDriver();
+            form.trackBar.Minimum = 0;
+            form.trackBar.Maximum = 255;
+            form.parameter.Text = "Threshold";
+            form.trackBar.Value = 0;
+            form.trackBar.ValueChanged += changevalue;
+            form.valueDisplay.Text = form.trackBar.Value.ToString();
+            form.Show();
         }
+
+       
 
         public void formdispose()
         {
-
+            form.Dispose();
         }
+
+        public void changevalue(object sender, EventArgs e)
+        {
+            form.valueDisplay.Text = form.trackBar.Value.ToString();
+        }
+
+
     }
 }
