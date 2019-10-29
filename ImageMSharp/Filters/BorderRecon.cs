@@ -14,7 +14,6 @@ namespace ImageMSharp.Filters
         displayDriver form;
         public Image draw(Image image)
         {
-            int progress = 0;
             GreyScale grey = new GreyScale();
             image = grey.draw(image);
             Bitmap img = new Bitmap(image.Width, image.Height);
@@ -22,12 +21,12 @@ namespace ImageMSharp.Filters
 
             for(int x = 1; x < image.Width - 1; x++)
             {
+                double progress = ((double)x / (double)image.Width) * 100;
+                form.progressBar.Value = (int)progress;
+                Console.WriteLine(progress);
                 for(int y = 1; y < image.Height - 1; y++)
                 {
-                    if(image.Width%x == 0)
-                    {
-                        form.progressBar.PerformStep();
-                    }
+
                     int pixelvalue = 0;
                     for(int Dx = -1; Dx <= 1; Dx++)
                     {
@@ -66,6 +65,7 @@ namespace ImageMSharp.Filters
             form = new displayDriver();
             form.parameter.Text = "Separator";
             form.valueDisplay.Text = "0";
+            form.progressBar.ForeColor = Color.Red;
             form.Show();
         }
 
