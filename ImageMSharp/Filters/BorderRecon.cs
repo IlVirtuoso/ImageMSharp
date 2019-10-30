@@ -40,19 +40,19 @@ namespace ImageMSharp.Filters
                 {
 
                     int pixelvalue = 0;
-                    for(int Dx = -1; Dx <= 1; Dx++)
+                    for(int dx = -1; dx <= 1 ; dx++)
                     {
-                        for(int Dy = -1; Dy <=1; Dy++)
+                        for(int dy = -1; dy <= 1; dy++)
                         {
-                            pixelvalue = kern[Dx, Dy] * matrix[Dx + x, Dy + y].R + pixelvalue;
+                            pixelvalue = matrix[dx + x, dy + y].R * kern[dx + 1, dy + 1] + pixelvalue;
                         }
-                        if(pixelvalue > 0 && pixelvalue < 255)
+                        if (pixelvalue > form.trackBar.Value && pixelvalue < 255)
                         {
                             img.SetPixel(x, y, Color.FromArgb(pixelvalue, pixelvalue, pixelvalue));
                         }
-                        else if(pixelvalue <= 0)
+                        else if (pixelvalue <= form.trackBar.Value)
                         {
-                            img.SetPixel(x, y,Color.FromArgb(0,0,0));
+                            img.SetPixel(x, y, Color.FromArgb(0, 0, 0));
                         }
                         else
                         {
@@ -73,7 +73,16 @@ namespace ImageMSharp.Filters
             form.progressBar.ForeColor = Color.Red;
             combo = combobox();
             form.Controls.Add(combo);
+            form.trackBar.Minimum = 0;
+            form.trackBar.Maximum = 255;
+            form.trackBar.Value = 0;
+            form.trackBar.ValueChanged += TrackBar_ValueChanged;
             form.Show();
+        }
+
+        private void TrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            form.valueDisplay.Text = form.trackBar.Value.ToString();
         }
 
         public void formdispose()
@@ -99,16 +108,56 @@ namespace ImageMSharp.Filters
                 case (int)Kernel.LAPLACIAN_V1:
                     for(int i = 0; i < x; i++)
                     {
-                        for(int k = 0; k < x, k++)
+                        for(int k = 0; k < x; k++)
                         {
                             kernel[i, k] = -1;
                         }
-                        kernel[1, 1] = 8;
+                        
                     }
-                    break;
+                    kernel[1, 1] = 8;
+                    return kernel;
+                    
 
+                case (int)Kernel.LAPLACIAN_V2:
+                    for(int i = 0; i < x; i++)
+                    {
+                        for(int k = 0; k < x; k++)
+                        {
+                            kernel[i, k] = 0;
+                        }
+                    }
+                    kernel[0, 0] = -4;
+                    kernel[2, 2] = 4;
+                    return kernel;
+
+                case (int) Kernel.SOBEL_HORIZONTAL:
+                    kernel[0, 0] = -1;
+                    kernel[0, 1] = 0;
+                    kernel[0, 2] = 1;
+                    kernel[1, 0] = -2;
+                    kernel[1, 1] = 0;
+                    kernel[1, 2] = 2;
+                    kernel[2, 0] = -1;
+                    kernel[2, 1] = 0;
+                    kernel[2, 2] = 1;
+                    return kernel;
+
+                case (int)Kernel.SOBEL_VERTICAL:
+                    kernel[0, 0] = -1;
+                    kernel[0, 1] = -2;
+                    kernel[0, 2] = -1;
+                    kernel[1, 0] = 0;
+                    kernel[1, 1] = 0;
+                    kernel[1, 2] = 0;
+                    kernel[2, 0] = 1;
+                    kernel[2, 1] = 2;
+                    kernel[2, 2] = 1;
+                    return kernel;
+
+                default:
+                    return kernel;
             }
-            return kernel;
+
         }
     }
 }
