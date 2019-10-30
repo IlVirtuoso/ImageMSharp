@@ -7,6 +7,7 @@ using ImageProcessor;
 using ImageProcessor.Imaging.Filters.EdgeDetection;
 using System.Drawing;
 using ImageMSharp.Libs;
+using System.Windows.Forms;
 namespace ImageMSharp.Filters
 {
     class BorderRecon:Effects
@@ -23,13 +24,17 @@ namespace ImageMSharp.Filters
 
         Kernel kernel;
         System.Windows.Forms.ComboBox combo;
+        System.Windows.Forms.CheckBox sovrapponi;
         public Image draw(Image image)
         {
+            Image original = image;
+            Color[,] origin = original.toMatrix();
             GreyScale grey = new GreyScale();
             image = grey.draw(image);
             Bitmap img = new Bitmap(image.Width, image.Height);
             Color[,] matrix = image.toMatrix();
             int[,] kern = kernelselector(combo.SelectedIndex);
+            bool on_mode = sovrapponi.Checked;
 
             for(int x = 1; x < image.Width - 1; x++)
             {
@@ -46,17 +51,35 @@ namespace ImageMSharp.Filters
                         {
                             pixelvalue = matrix[dx + x, dy + y].R * kern[dx + 1, dy + 1] + pixelvalue;
                         }
-                        if (pixelvalue > form.trackBar.Value && pixelvalue < 255)
+                        if (on_mode)
                         {
-                            img.SetPixel(x, y, Color.FromArgb(pixelvalue, pixelvalue, pixelvalue));
-                        }
-                        else if (pixelvalue <= form.trackBar.Value)
-                        {
-                            img.SetPixel(x, y, Color.FromArgb(0, 0, 0));
+                            if (pixelvalue > form.trackBar.Value && pixelvalue < 255)
+                            {
+                                img.SetPixel(x, y, Color.FromArgb(pixelvalue, origin[x,y].G , origin[x,y].B));
+                            }
+                            else if (pixelvalue <= form.trackBar.Value)
+                            {
+                                img.SetPixel(x, y, Color.FromArgb(origin[x,y].R, origin[x,y].G, origin[x,y].B));
+                            }
+                            else
+                            {
+                                img.SetPixel(x, y, Color.FromArgb(255, 0, 0));
+                            }
                         }
                         else
                         {
-                            img.SetPixel(x, y, Color.FromArgb(255, 255, 255));
+                            if (pixelvalue > form.trackBar.Value && pixelvalue < 255)
+                            {
+                                img.SetPixel(x, y, Color.FromArgb(pixelvalue, pixelvalue, pixelvalue));
+                            }
+                            else if (pixelvalue <= form.trackBar.Value)
+                            {
+                                img.SetPixel(x, y, Color.FromArgb(0, 0, 0));
+                            }
+                            else
+                            {
+                                img.SetPixel(x, y, Color.FromArgb(255, 255, 255));
+                            }
                         }
                     }
                 }
@@ -72,7 +95,9 @@ namespace ImageMSharp.Filters
             form.valueDisplay.Text = "0";
             form.progressBar.ForeColor = Color.Red;
             combo = combobox();
+            sovrapponi = checkbox();
             form.Controls.Add(combo);
+            form.Controls.Add(sovrapponi);
             form.trackBar.Minimum = 0;
             form.trackBar.Maximum = 255;
             form.trackBar.Value = 0;
@@ -158,6 +183,16 @@ namespace ImageMSharp.Filters
                     return kernel;
             }
 
+        }
+
+        public CheckBox checkbox()
+        {
+            CheckBox ch = new CheckBox();
+            ch.Text = "Sovrapponi";
+            ch.Checked = false;
+            ch.ForeColor = Color.White;
+            ch.Show();
+            return ch;
         }
     }
 }
