@@ -63,7 +63,7 @@ namespace ImageMSharp.Filters
                             }
                             else
                             {
-                                img.SetPixel(x, y, Color.FromArgb(255, 0, 0));
+                                img.SetPixel(x, y, Color.FromArgb(0, 255, 0));
                             }
                         }
                         else

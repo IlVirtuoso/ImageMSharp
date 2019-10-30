@@ -185,7 +185,7 @@
             this.ViewBox.Location = new System.Drawing.Point(0, 24);
             this.ViewBox.Name = "ViewBox";
             this.ViewBox.Size = new System.Drawing.Size(781, 385);
-            this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ViewBox.TabIndex = 6;
             this.ViewBox.TabStop = false;
             // 
@@ -194,21 +194,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(781, 409);
             this.Controls.Add(this.flowpanel);
             this.Controls.Add(this.ViewBox);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GUI";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "ImageMSharp";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GUI_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
