@@ -84,6 +84,7 @@ namespace ImageMSharp.Filters
                     }
                 }
             }
+            GC.Collect();
             return img;
             
         }
@@ -191,6 +192,7 @@ namespace ImageMSharp.Filters
             ch.Text = "Sovrapponi";
             ch.Checked = false;
             ch.ForeColor = Color.White;
+            ch.Dock = DockStyle.Right;
             ch.Show();
             return ch;
         }
