@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\BorderRecon.cs" />
-    <Compile Include="Filters\BorderSostitution.cs" />
     <Compile Include="Filters\displayDriver.cs">
       <SubType>Form</SubType>
     </Compile>
