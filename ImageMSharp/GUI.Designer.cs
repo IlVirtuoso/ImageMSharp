@@ -54,10 +54,6 @@
             this.FilterSelector.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FilterSelector.FormattingEnabled = true;
             this.FilterSelector.ItemHeight = 23;
-            this.FilterSelector.Items.AddRange(new object[] {
-            "Threshold",
-            "BorderRecon",
-            "GreyScale"});
             this.FilterSelector.Location = new System.Drawing.Point(3, 3);
             this.FilterSelector.Name = "FilterSelector";
             this.FilterSelector.Size = new System.Drawing.Size(121, 29);
@@ -188,6 +184,7 @@
             this.ViewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ViewBox.TabIndex = 6;
             this.ViewBox.TabStop = false;
+            this.ViewBox.Click += new System.EventHandler(this.ViewBox_Click_2);
             // 
             // GUI
             // 

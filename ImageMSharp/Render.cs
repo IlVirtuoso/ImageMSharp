@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using ImageProcessor;
 using ImageMSharp.Filters;
+using System.Threading;
+using ImageMSharp.Libs;
 
 
 namespace ImageMSharp
@@ -14,9 +16,10 @@ namespace ImageMSharp
     {
 
         enum filters{
+            GreyScale,
             Threshold,
             BorderRecon,
-            GreyScale
+            MetricRevisor
         }
 
         private filters filtr;
@@ -38,10 +41,11 @@ namespace ImageMSharp
         }
         public void compute()
         {
-            
+
             image = effect.draw(image);
             picture = image;
         }
+        
 
         
         public void FilterSelect(int filter)
@@ -57,6 +61,9 @@ namespace ImageMSharp
 
                 case (int) filters.GreyScale:
                     effect = new GreyScale();
+                    break;
+                case (int)filters.MetricRevisor:
+                    effect = new MetricRevisor();
                     break;
 
             }
@@ -83,7 +90,11 @@ namespace ImageMSharp
                 }
                 catch(OutOfMemoryException exc)
                 {
-                    
+                    Raw raw = new Raw(value);
+                    _picture = raw.getImage();
+                    original = picture;
+                    image = new Bitmap(_picture);
+                    this._imagepath = value;
 
                 }
             }

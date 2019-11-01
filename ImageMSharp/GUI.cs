@@ -16,10 +16,12 @@ namespace ImageMSharp
         private String lastdir;
         private Render render;
         private String filter;
-    
+        String[] filters = { "Greyscale", "Threshold", "BorderRecon" , "MetricRevisor"};
         public GUI()
         {
+     
             InitializeComponent();
+            FilterSelector.Items.AddRange(filters);
             lastdir = "C:\\";
         }
 
@@ -138,6 +140,11 @@ namespace ImageMSharp
         }
 
         private void ProgressBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ViewBox_Click_2(object sender, EventArgs e)
         {
 
         }

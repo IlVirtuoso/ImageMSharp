@@ -74,6 +74,7 @@
       <DependentUpon>displayDriver.cs</DependentUpon>
     </Compile>
     <Compile Include="Filters\GreyScale.cs" />
+    <Compile Include="Filters\MetricRevisor.cs" />
     <Compile Include="Filters\Threshold.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
