@@ -25,6 +25,36 @@ namespace ImageMSharp.Libs
         return matrix;
     }
 
+        public static int[,] decompMatrix(this Image image,char color)
+        {
+            
+            Color[,] mat = image.toMatrix();
+            int[,] Rmat = new int[image.Width, image.Height];
+            for(int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    if(color == 'R')
+                    {
+                        Rmat[x, y] = mat[x, y].R;
+                    }
+                    else if(color == 'G')
+                    {
+                        Rmat[x, y] = mat[x, y].G;
+                    }
+                    else if(color == 'B')
+                    {
+                        Rmat[x, y] = mat[x, y].B;
+                    }
+                    else
+                    {
+                        throw new Exception(color + "not a valid argument");
+                    }
+                }
+            }
+            return Rmat;
+        }
+
     public static Image toImage(this Color[,] matrix)
     {
         Bitmap newimage = new Bitmap(matrix.GetLength(0), matrix.GetLength(1));

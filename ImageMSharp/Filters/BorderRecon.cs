@@ -127,61 +127,29 @@ namespace ImageMSharp.Filters
 
         public int[,] kernelselector(int value)
         {
-            int[,] kernel = new int[3,3];
+            
             int x = 3;
             switch (value)
             {
                 case (int)Kernel.LAPLACIAN_V1:
-                    for(int i = 0; i < x; i++)
-                    {
-                        for(int k = 0; k < x; k++)
-                        {
-                            kernel[i, k] = -1;
-                        }
-                        
-                    }
-                    kernel[1, 1] = 8;
-                    return kernel;
+                    int[,] laplacian = { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } };
+                    return laplacian;
                     
 
                 case (int)Kernel.LAPLACIAN_V2:
-                    for(int i = 0; i < x; i++)
-                    {
-                        for(int k = 0; k < x; k++)
-                        {
-                            kernel[i, k] = 0;
-                        }
-                    }
-                    kernel[0, 0] = -4;
-                    kernel[2, 2] = 4;
-                    return kernel;
+                    int [,]laplacian_v2 = { { -4, 0, 0 }, { 0, 0, 0 }, { 0, 0, 4 } };
+                    return laplacian_v2;
 
                 case (int) Kernel.SOBEL_HORIZONTAL:
-                    kernel[0, 0] = -1;
-                    kernel[0, 1] = 0;
-                    kernel[0, 2] = 1;
-                    kernel[1, 0] = -2;
-                    kernel[1, 1] = 0;
-                    kernel[1, 2] = 2;
-                    kernel[2, 0] = -1;
-                    kernel[2, 1] = 0;
-                    kernel[2, 2] = 1;
-                    return kernel;
+                    int[,] sobel_h = { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
+                    return sobel_h;
 
                 case (int)Kernel.SOBEL_VERTICAL:
-                    kernel[0, 0] = -1;
-                    kernel[0, 1] = -2;
-                    kernel[0, 2] = -1;
-                    kernel[1, 0] = 0;
-                    kernel[1, 1] = 0;
-                    kernel[1, 2] = 0;
-                    kernel[2, 0] = 1;
-                    kernel[2, 1] = 2;
-                    kernel[2, 2] = 1;
-                    return kernel;
+                    int[,] sobel_v = { { -1, -2, -1 }, { 0, 0, 0 }, { 1, 2, 1 } };
+                    return sobel_v;
 
                 default:
-                    return kernel;
+                    return kernelselector(0);
             }
 
         }
