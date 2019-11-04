@@ -41,7 +41,7 @@ namespace ImageMSharp
         }
         public void compute()
         {
-
+            
             image = effect.draw(image);
             picture = image;
         }

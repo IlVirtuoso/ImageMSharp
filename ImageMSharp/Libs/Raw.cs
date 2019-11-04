@@ -11,10 +11,13 @@ namespace ImageMSharp.Libs
 {
     class Raw
     {
-        Image image;
+        Bitmap image;
+       
         public Raw(String pathname)
         {
-            
+            FileStream img = File.OpenRead(pathname);
+           
+
         }
 
         public Image getImage()
